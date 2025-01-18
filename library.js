@@ -1,3 +1,4 @@
+// Task 1 : Define the Book Constructor
 class Book {
   constructor(title, author, available = true) {
     this.title = title;
@@ -5,6 +6,8 @@ class Book {
     this.available = available;
   }
 }
+
+// Task 2: Create Methods to Manage Books
 const library = {
   books: [],
 
@@ -53,3 +56,18 @@ const library = {
     //return availableBooks;
   },
 };
+
+// Task 3: Use JSON Data to Add Books to the Library
+const newBooks = `[
+{"title": "Eloquent JavaScript", "author": "Marijn Haverbeke"},
+{"title": "JavaScrip:The Good Parts", "author":"Douglas Crockford"};
+{"title": "You Don't Kno JS: Scope & Closures", "author":"Kyle Simpson"}
+]`; //{"title": "", "author":""};
+
+function receiveBook(bookData) {
+  console.log(`Adding new books to our shelves!`);
+  const boosToAdd = JSON.parse(bookData);
+  for (let book of boosToAdd) {
+    library.addBook(book.title, book.author);
+  }
+}
