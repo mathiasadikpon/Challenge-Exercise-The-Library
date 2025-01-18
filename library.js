@@ -47,7 +47,7 @@ const library = {
   getAvailableBooks() {
     //let availableBooks = this.books.filter((book) => book.available); using filter
     let availableBooks = [];
-    for (let book of books) {
+    for (let book of this.books) {
       if (book.available) {
         availableBooks.push(book.title);
       }
@@ -64,11 +64,11 @@ const library = {
 // Task 3: Use JSON Data to Add Books to the Library
 const newBooks = `[
 {"title": "Eloquent JavaScript", "author": "Marijn Haverbeke"},
-{"title": "JavaScrip:The Good Parts", "author":"Douglas Crockford"};
+{"title": "JavaScrip:The Good Parts", "author":"Douglas Crockford"},
 {"title": "You Don't Kno JS: Scope & Closures", "author":"Kyle Simpson"}
 ]`; //{"title": "", "author":""};
 
-function receiveBook(bookData) {
+function receiveBooks(bookData) {
   console.log(`Adding new books to our shelves!`);
   const boosToAdd = JSON.parse(bookData);
   for (let book of boosToAdd) {
@@ -77,3 +77,13 @@ function receiveBook(bookData) {
 }
 
 //Task 4: Utilize Error Handling
+
+// Tests
+console.log(
+  `There are currently ${library.books.length} books in the library's database.`
+);
+library.addBook("Eloquent JavaScript", "Marijn Haverbeke");
+receiveBooks(newBooks);
+library.checkOutBook("Eloquent JavaScript");
+library.checkOutBook("Grokking the Coding Interview");
+library.getAvailableBooks();
