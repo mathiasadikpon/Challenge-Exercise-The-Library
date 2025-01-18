@@ -19,24 +19,28 @@ const library = {
     );
   },
   checkOutBook(title) {
-    let found = false;
-    for (let book of this.books) {
-      if (book.title === title) {
-        found = true;
-        if (book.available) {
-          book.available = false;
-          console.log(`Check out: ${book.title}`);
-        } else {
-          console.log(
-            `The book with title ${title} is not available at the moment!`
-          );
-        }
+    try {
+      let found = false;
+      for (let book of this.books) {
+        if (book.title === title) {
+          found = true;
+          if (book.available) {
+            book.available = false;
+            console.log(`Check out: ${book.title}`);
+          } else {
+            throw new Error(
+              `The book with title ${title} is not available at the moment!`
+            );
+          }
 
-        break;
+          break;
+        }
       }
-    }
-    if (!found) {
-      console.log(`The book with title ${title} is not found!`);
+      if (!found) {
+        throw new Error(`The book with title ${title} is not found!`);
+      }
+    } catch (er) {
+      console.log(er.message);
     }
   },
 
@@ -71,3 +75,5 @@ function receiveBook(bookData) {
     library.addBook(book.title, book.author);
   }
 }
+
+//Task 4: Utilize Error Handling
